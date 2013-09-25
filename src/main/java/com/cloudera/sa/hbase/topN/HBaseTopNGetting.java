@@ -22,8 +22,8 @@ public class HBaseTopNGetting {
   public static void main(String[] args) throws IOException, InterruptedException {
 
     if (args.length == 0 || args[0].toLowerCase().startsWith("-h")) {
-      System.out.println("HBaseTop5Getting put <tableName> <columnFamily> <numberOfMSecondsIntervals> <repeatNTimes> <numberOfItems> <TopNToRetain> ");
-      System.out.println("HBaseTop5Getting get <tableName> <columnFamily> <numberOfMSecondsIntervals> <repeatNTimes> <TopNToRetain>");
+      System.out.println("HBaseTopNGetting put <tableName> <columnFamily> <numberOfMSecondsIntervals> <repeatNTimes> <numberOfItems> <TopNToRetain> ");
+      System.out.println("HBaseTopNGetting get <tableName> <columnFamily> <numberOfMSecondsIntervals> <repeatNTimes> <TopNToRetain>");
       return;
     }
 
@@ -34,7 +34,6 @@ public class HBaseTopNGetting {
       int repeatNTimes = Integer.parseInt(args[4]);
       int topNToRetain = Integer.parseInt(args[5]);
       
-
       getAction(tableName, columnFamily, waitInternalTime, repeatNTimes);
     } else {
       String tableName = args[1];
@@ -83,7 +82,7 @@ public class HBaseTopNGetting {
     HBaseAdmin admin = new HBaseAdmin(hConfig);
     HTable hTable = null;
     
-    
+    //Create table if needed
     if (admin.tableExists(Bytes.toBytes(tableName)) == false) {
       HTableDescriptor newTable = new HTableDescriptor();
       newTable.setName(Bytes.toBytes(tableName));
